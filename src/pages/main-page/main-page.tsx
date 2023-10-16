@@ -1,6 +1,7 @@
-import React from 'react';
 import FilmCard from '../../components/film-card';
 import MainFilmCard from '../../components/main-film-card';
+import { Helmet } from 'react-helmet-async';
+import { filmCardCount } from '../../const';
 
 type MainFilmCardProps = {
   title: string;
@@ -10,7 +11,10 @@ type MainFilmCardProps = {
 
 function MainPage({title, genre, releaseDate}: MainFilmCardProps): JSX.Element {
   return (
-    <React.Fragment>
+    <>
+      <Helmet>
+        <title>WTW. Главная страница</title>
+      </Helmet>
       <MainFilmCard title={title} genre={genre} releaseDate={releaseDate}/>
       <div className="page-content">
         <section className="catalog">
@@ -50,26 +54,9 @@ function MainPage({title, genre, releaseDate}: MainFilmCardProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
+            {Array.from({ length: filmCardCount}, (_, index) => (
+              <FilmCard key={index} />
+            )) }
           </div>
 
           <div className="catalog__more">
@@ -91,7 +78,7 @@ function MainPage({title, genre, releaseDate}: MainFilmCardProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
