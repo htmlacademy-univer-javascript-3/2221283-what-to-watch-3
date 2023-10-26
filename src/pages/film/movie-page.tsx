@@ -1,6 +1,12 @@
 import { Helmet } from 'react-helmet-async';
+import CardList from '../../components/card-list';
+import { MoviePageProps } from '../../types/types';
+import Logo from '../../components/logo';
+import Profile from '../../components/profile';
+import Footer from '../../components/footer';
+import { Link } from 'react-router-dom';
 
-export default function MoviePage(): JSX.Element {
+export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
   return (
     <>
       <Helmet>
@@ -16,28 +22,8 @@ export default function MoviePage(): JSX.Element {
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img
-                    src="img/avatar.jpg"
-                    alt="User avatar"
-                    width={63}
-                    height={63}
-                  />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <Logo />
+            <Profile />
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -60,9 +46,9 @@ export default function MoviePage(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">
+                <Link to={'review'} className="btn film-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -134,71 +120,9 @@ export default function MoviePage(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width={280}
-                  height={175}
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/bohemian-rhapsody.jpg"
-                  alt="Bohemian Rhapsody"
-                  width={280}
-                  height={175}
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Bohemian Rhapsody
-                </a>
-              </h3>
-            </article>
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width={280} height={175} />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Macbeth
-                </a>
-              </h3>
-            </article>
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width={280} height={175} />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Aviator
-                </a>
-              </h3>
-            </article>
-          </div>
+          <CardList filmsCards={filmsCards}></CardList>
         </section>
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
