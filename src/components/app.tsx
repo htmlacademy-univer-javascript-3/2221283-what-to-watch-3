@@ -9,21 +9,16 @@ import MoviePage from '../pages/film/movie-page';
 import AddReview from '../pages/add-review/add-review';
 import Player from '../pages/player/player';
 import NotFoundPage from '../pages/not-found/not-found';
+import { AppProps } from '../types/types';
 
-type MainFilmCardProps = {
-  title: string;
-  genre: string;
-  releaseDate: number;
-}
-
-function App({title, genre, releaseDate}: MainFilmCardProps): JSX.Element {
+function App({heroFilmCard, filmsCards}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage title = {title} genre = {genre} releaseDate= {releaseDate} />}
+            element={<MainPage heroFilmCard={heroFilmCard} filmsCards={filmsCards.slice(0,8)} />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -32,18 +27,26 @@ function App({title, genre, releaseDate}: MainFilmCardProps): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthStatus.NoAuth}>
-                <MyList />
+              <PrivateRoute authorizationStatus={AuthStatus.Auth}>
+                <MyList
+                  filmsCards = {filmsCards}
+                />
               </PrivateRoute>
             }
           />
-          <Route
-            path={AppRoute.Film}
-            element={<MoviePage />}
+          <Route path={AppRoute.AddReview} element={
+            <PrivateRoute authorizationStatus={AuthStatus.Auth}>
+              <AddReview
+                name = {heroFilmCard.title}
+                previewImage={heroFilmCard.previewImage}
+                posterImage={heroFilmCard.posterImage}
+              />
+            </PrivateRoute>
+          }
           />
           <Route
-            path={AppRoute.AddReview}
-            element={<AddReview />}
+            path={AppRoute.Film}
+            element={<MoviePage filmsCards = {filmsCards.slice(0,4)} />}
           />
           <Route
             path={AppRoute.Player}
