@@ -47,3 +47,10 @@ export type MyListProps = CardListProps;
 
 export type MainProps = AppProps;
 
+export type VideoPlayerProps = {
+  src: string;
+  id: number;
+  width: number;
+  height: number;
+};
+
