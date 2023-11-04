@@ -1,6 +1,6 @@
 import { FilmsProps, HeroProps } from '../types/types';
 
-const VIDEO_MOCK = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
+export const VIDEO_MOCK = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
 
 export const films: FilmsProps[] = [
   {
