@@ -32,7 +32,7 @@ export default function MyList({filmsCards}: MyListProps): JSX.Element {
         </header>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <CardList filmsCards={filmsCards} />
+          <CardList filmsCards={filmsCards} genre={undefined}/>
         </section>
         <Footer />
       </div>
