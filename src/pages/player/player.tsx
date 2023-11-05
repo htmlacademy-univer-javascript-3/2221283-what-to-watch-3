@@ -1,6 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Helmet} from 'react-helmet-async';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PlayerProps } from '../../types/types';
 
-export default function Player(): JSX.Element {
+export default function Player({filmsCards}: PlayerProps): JSX.Element {
+  const params = useParams();
+  const navigate = useNavigate();
+  const id = params.id ? parseInt(params.id, 10) : 1;
+  const film = filmsCards.find((x) => x.id === id);
   return (
     <>
       <Helmet>
@@ -8,7 +18,7 @@ export default function Player(): JSX.Element {
       </Helmet>
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg" />
-        <button type="button" className="player__exit">
+        <button onClick={() => navigate(-1)} type="button" className="player__exit">
           Exit
         </button>
         <div className="player__controls">
@@ -19,7 +29,7 @@ export default function Player(): JSX.Element {
                 Toggler
               </div>
             </div>
-            <div className="player__time-value">1:30:29</div>
+            <div className="player__time-value">{film?.runTime}</div>
           </div>
           <div className="player__controls-row">
             <button type="button" className="player__play">

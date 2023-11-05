@@ -1,9 +1,19 @@
 export type FilmsProps = {
   id: number;
-  title: string;
-  previewImage: string;
-  previewVideoLink: string;
+  name: string;
+  posterImage: string;
+  backgroundImage: string;
+  backgroundColor: string;
+  videoLink: string;
+  description: string;
+  rating: number;
+  scoresCount: number;
+  director: string;
+  starring: string[];
+  runTime: number;
   genre: string;
+  released: number;
+  isFavorite: boolean;
 }
 
 export type AppProps = {
@@ -30,9 +40,7 @@ export type HeroProps = {
 }
 
 export type AddReviewProps = {
-  name: string;
-  posterImage: string;
-  previewImage: string;
+  filmsCards: FilmsProps[];
 }
 
 export type MoviePageProps = {
@@ -41,6 +49,7 @@ export type MoviePageProps = {
 
 export type CardListProps = {
   filmsCards: FilmsProps[];
+  genre: string | undefined;
 }
 
 export type MyListProps = CardListProps;
@@ -54,3 +63,14 @@ export type VideoPlayerProps = {
   height: number;
 };
 
+export type ReviewProps = {
+  id: string;
+  date: string;
+  user: string;
+  comment: string;
+  rating: number;
+}
+
+export type PlayerProps = {
+  filmsCards: FilmsProps[];
+}

@@ -51,7 +51,7 @@ function MainPage({heroFilmCard, filmsCards}: MainProps): JSX.Element {
             </li>
           </ul>
 
-          <CardList filmsCards={filmsCards}/>
+          <CardList filmsCards={filmsCards} genre={undefined}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
