@@ -1,10 +1,10 @@
 export enum AppRoute {
-  Main = '/',
-  SignIn = '/login',
-  MyList = '/mylist',
-  Film = '/films/:id',
-  AddReview = 'films/:id/review',
-  Player = '/player/:id'
+  Root = '/',
+  Login = '/login',
+  MyListEnum = '/mylist',
+  Films = '/films/:id',
+  AddReviewEnum = '/films/:id/review',
+  PlayerEnum = '/player/:id'
 }
 
 export enum AuthStatus {
@@ -12,5 +12,3 @@ export enum AuthStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-
-export const filmCardCount = 20;

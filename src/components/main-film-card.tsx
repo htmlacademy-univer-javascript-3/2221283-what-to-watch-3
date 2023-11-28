@@ -4,7 +4,7 @@ import { HeroProps } from '../types/types';
 import Logo from './logo';
 import Profile from './profile';
 
-function MainFilmCard({title, genre, releaseDate}: HeroProps) :JSX.Element {
+function MainFilmCard({name, genre, released}: HeroProps) :JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -25,10 +25,10 @@ function MainFilmCard({title, genre, releaseDate}: HeroProps) :JSX.Element {
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{title}</h2>
+            <h2 className="film-card__title">{name}</h2>
             <p className="film-card__meta">
               <span className="film-card__genre">{genre}</span>
-              <span className="film-card__year">{releaseDate}</span>
+              <span className="film-card__year">{released}</span>
             </p>
 
             <div className="film-card__buttons">

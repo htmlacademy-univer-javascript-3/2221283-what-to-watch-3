@@ -1,5 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Genre } from '../types/genre';
 
-export const changeGenre = createAction<Genre>('genre/changeGenre');
-export const getFilms = createAction('films/getFilms');
+export const changeGenre = createAction('filterByGenre', (genre:string) => ({
+  payload: genre,
+}));
+
+export const getFilms = createAction('showFilms');
