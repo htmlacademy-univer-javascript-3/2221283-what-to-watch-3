@@ -1,8 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function FormReview() {
+  const params = useParams();
   const date = new Date();
   const [review, setReview] = useState({
+    id: params.id,
     date: date,
     user: '',
     comment: '',

@@ -1,23 +1,17 @@
 import Card from './card';
-import { CardListProps } from '../types/types';
-import { useState } from 'react';
+import { useAppSelector } from '../hooks';
 
-function CardList({filmsCards}: CardListProps): JSX.Element {
-  const [, setActiveCard] = useState(-1);
+export default function CardList() {
+  const films = useAppSelector((state) => state.showedFilms);
   return (
     <div className="catalog__films-list">
-
-      {filmsCards.map((filmCard) => (
-        <article className="small-film-card catalog__films-card" key={filmCard.id} onMouseEnter={() => {
-          setActiveCard(filmCard.id);
-        }}
-        >
-          <Card id={filmCard.id} name={filmCard.title} previewImage={filmCard.previewImage} />
-        </article>
-      )
+      {films.map((filmCard) =>
+        (
+          <article className="small-film-card catalog__films-card" key={filmCard.id}>
+            <Card id={filmCard.id} name={filmCard.name} previewImage={filmCard.previewImage} />
+          </article>
+        )
       )}
     </div>
   );
 }
-
-export default CardList;

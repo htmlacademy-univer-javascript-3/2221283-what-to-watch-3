@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Helmet } from 'react-helmet-async';
+import { useAppDispatch } from '../../hooks';
 import CardList from '../../components/card-list';
-import { MoviePageProps } from '../../types/types';
 import Logo from '../../components/logo';
 import Profile from '../../components/profile';
 import Footer from '../../components/footer';
@@ -11,15 +10,17 @@ import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Overview from '../../components/overviews';
 import Details from '../../components/details';
-import Reviews from '../../types/reviews';
+import Reviews from '../../components/reviews';
+import { changeGenre, getFilms } from '../../store/action';
+import { FilmsProps, ReviewProps } from '../../types/types';
 
-export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
-  const params = useParams();
-  const [toggleState, setToggleState] = useState(1);
-  const id = params.id ? parseInt(params.id, 10) : 1;
-  const film = filmsCards.find((x) => x.id === id);
+export type MoviePageProps = {
+  filmCards: FilmsProps[];
+  reviews: ReviewProps[];
+}
+
+function convertToText(rating:number):string{
   let textRating = '';
-  const rating = film ? film.rating : 0;
   if (rating <= 3){
     textRating = 'Bad';
   } else if (rating > 3 && rating <= 5){
@@ -29,6 +30,20 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
   } else if (rating >= 8){
     textRating = 'Very good';
   }
+  return textRating;
+}
+
+export default function MoviePage({filmCards, reviews}: MoviePageProps) {
+  const params = useParams();
+  const [toggleState, setToggleState] = useState(1);
+  const id = params.id ? parseInt(params.id, 10) : 1;
+  const film = filmCards.find((x) => x.id === id);
+  const rating = film ? film.rating : 0;
+  const textRating = convertToText(rating);
+
+  const dispatch = useAppDispatch();
+  dispatch(changeGenre(film?.genre ? film?.genre : 'All'));
+  dispatch(getFilms());
 
   const toggleTabs = (index:number) => {
     setToggleState(index);
@@ -36,9 +51,6 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
 
   return (
     <>
-      <Helmet>
-        <title>WTW. Выбранный фильм</title>
-      </Helmet>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -49,8 +61,8 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
-            <Logo />
-            <Profile />
+            <Logo/>
+            <Profile/>
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -60,14 +72,14 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
                 <span className="film-card__year">{film?.released}</span>
               </p>
               <div className="film-card__buttons">
-                <Link to={`/player/${id}`} style={{ textDecoration: 'none' }}>
-                  <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button">
+                  <Link to={`/player/${id}`} className='film-card__button' style={{textDecoration:'none', color: '#eee5b5'}}>
                     <svg viewBox="0 0 19 19" width={19} height={19}>
                       <use xlinkHref="#play-s" />
                     </svg>
                     <span>Play</span>
-                  </button>
-                </Link>
+                  </Link>
+                </button>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />
@@ -75,9 +87,7 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={'review'} className="btn film-card__button">
-                  Add review
-                </Link>
+                <Link to={'review'} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -135,7 +145,7 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
                 genre={film?.genre}
                 released={film?.released}
               />
-              <Reviews active={toggleState === 3}/>
+              <Reviews active={toggleState === 3} reviews={reviews}/>
             </div>
           </div>
         </div>
@@ -143,9 +153,9 @@ export default function MoviePage({filmsCards}: MoviePageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <CardList filmsCards={filmsCards} genre={film?.genre}></CardList>
+          <CardList/>
         </section>
-        <Footer />
+        <Footer/>
       </div>
     </>
   );
