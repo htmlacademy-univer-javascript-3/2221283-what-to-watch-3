@@ -18,7 +18,7 @@ function App({heroFilmCard, filmsCards}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage heroFilmCard={heroFilmCard} filmsCards={filmsCards.slice(0,8)} />}
+            element={<MainPage heroFilmCard={heroFilmCard} />}
           />
           <Route
             path={AppRoute.SignIn}

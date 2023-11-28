@@ -49,12 +49,14 @@ export type MoviePageProps = {
 
 export type CardListProps = {
   filmsCards: FilmsProps[];
-  genre: string | undefined;
+  genre: string;
 }
 
 export type MyListProps = CardListProps;
 
-export type MainProps = AppProps;
+export type MainProps = {
+  heroFilmCard: HeroProps;
+};
 
 export type VideoPlayerProps = {
   src: string;
