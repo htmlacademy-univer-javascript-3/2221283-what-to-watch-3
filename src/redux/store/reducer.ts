@@ -1,20 +1,28 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilms } from './action';
-import { SmallFilmProps } from '../types/types';
-import { smallFilms } from '../mocks/films';
+import { changeGenre, getFilms, loadFilms, requireAuthorization, setError, setFilmsLoadingStatus } from './action';
+import { SmallFilmProps } from '../../types/types';
+import { AuthStatus } from '../../const';
 
 type initialStateProps = {
   genre: string;
   films: SmallFilmProps[];
   showedFilms: SmallFilmProps[];
   shownFilmsCount: number;
+  loadFilms: SmallFilmProps[];
+  authorizationStatus: AuthStatus;
+  error: string | null;
+  isFilmsLoading: boolean;
 }
 
 const initialState:initialStateProps = {
   genre: 'All',
-  films: smallFilms,
+  films: [],
+  loadFilms: [],
   showedFilms: [],
   shownFilmsCount: 0,
+  authorizationStatus: AuthStatus.Unknown,
+  error: null,
+  isFilmsLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,9 +33,9 @@ const reducer = createReducer(initialState, (builder) => {
       state.films = [];
       state.showedFilms = [];
       if (state.genre === 'All'){
-        state.films = smallFilms;
+        state.films = state.loadFilms;
       } else{
-        smallFilms.forEach((film) => {
+        state.loadFilms.forEach((film) => {
           if (film.genre === state.genre) {
             state.films.push(film);
           }
@@ -44,6 +52,18 @@ const reducer = createReducer(initialState, (builder) => {
         state.shownFilmsCount++;
         i++;
       }
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.loadFilms = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(setFilmsLoadingStatus, (state, action) => {
+      state.isFilmsLoading = action.payload;
     });
 });
 

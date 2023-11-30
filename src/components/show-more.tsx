@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getFilms } from '../store/action';
+import { getFilms } from '../redux/store/action';
 
 export default function ShowMore() {
   const dispatch = useAppDispatch();

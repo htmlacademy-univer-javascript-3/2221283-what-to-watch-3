@@ -10,6 +10,9 @@ import NotFoundPage from '../pages/not-found/not-found';
 import {AppRoute, AuthStatus} from '../const';
 import PrivateRoute from './private-route/private-route';
 import { HeroProps, FilmProps, SmallFilmProps, ReviewProps } from '../types/types';
+import { useAppSelector } from '../hooks';
+import LoadingScreen from '../pages/loading-screen/loading-screen';
+
 
 type AppProps = {
   heroFilmCard: HeroProps;
@@ -19,6 +22,12 @@ type AppProps = {
 }
 
 export default function App({heroFilmCard, filmCards, smallFilmCards, reviews}: AppProps) {
+  const isFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
+  if (isFilmsLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -54,7 +63,7 @@ export default function App({heroFilmCard, filmCards, smallFilmCards, reviews}: 
         />
         <Route path={AppRoute.PlayerEnum} element={
           <Player
-            filmsCards = {filmCards}
+            filmCards = {filmCards}
           />
         }
         />
