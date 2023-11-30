@@ -2,7 +2,7 @@ import MainFilmCard from '../../components/main-film-card';
 import Footer from '../../components/footer';
 import { HeroProps } from '../../types/types';
 import { useAppDispatch } from '../../hooks';
-import { changeGenre, getFilms } from '../../store/action';
+import { changeGenre, getFilms } from '../../redux/store/action';
 import ShowMore from '../../components/show-more';
 import Genres from '../../components/genres';
 

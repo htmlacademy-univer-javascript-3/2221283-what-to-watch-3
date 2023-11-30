@@ -11,11 +11,11 @@ import { useState } from 'react';
 import Overview from '../../components/overviews';
 import Details from '../../components/details';
 import Reviews from '../../components/reviews';
-import { changeGenre, getFilms } from '../../store/action';
-import { FilmsProps, ReviewProps } from '../../types/types';
+import { changeGenre, getFilms } from '../../redux/store/action';
+import { FilmProps, ReviewProps } from '../../types/types';
 
 export type MoviePageProps = {
-  filmCards: FilmsProps[];
+  filmCards: FilmProps[];
   reviews: ReviewProps[];
 }
 

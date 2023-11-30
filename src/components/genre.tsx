@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../hooks';
-import { changeGenre, getFilms } from '../store/action';
+import { changeGenre, getFilms } from '../redux/store/action';
 
 type GenreProps = {
   name:string;
