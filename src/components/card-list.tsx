@@ -8,7 +8,7 @@ export default function CardList() {
       {films.map((filmCard) =>
         (
           <article className="small-film-card catalog__films-card" key={filmCard.id}>
-            <Card id={filmCard.id} name={filmCard.name} previewImage={filmCard.previewImage} />
+            <Card id={filmCard.id} name={filmCard.name} previewImage={filmCard.previewImage} previewVideoLink={filmCard.previewVideoLink} />
           </article>
         )
       )}

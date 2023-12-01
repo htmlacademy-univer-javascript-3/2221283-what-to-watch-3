@@ -7,7 +7,7 @@ export type ReviewProps = {
 }
 
 export type HeroProps = {
-  id: number;
+  id: string;
   name: string;
   posterImage: string;
   backgroundImage: string;
@@ -19,7 +19,7 @@ export type HeroProps = {
 }
 
 export type SmallFilmProps = {
-  id: number;
+  id: string;
   name: string;
   previewImage: string;
   previewVideoLink: string;
@@ -27,7 +27,7 @@ export type SmallFilmProps = {
 }
 
 export type FilmProps = {
-  id: number;
+  id: string;
   name: string;
   posterImage: string;
   backgroundImage: string;
