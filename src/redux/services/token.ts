@@ -1,4 +1,4 @@
-const AUTH_TOKEN = '';
+const AUTH_TOKEN = 'wtw';
 
 export type Token = string;
 

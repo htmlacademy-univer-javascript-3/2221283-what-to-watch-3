@@ -5,14 +5,18 @@ import {Helmet} from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo';
 import Profile from '../../components/profile';
-import { AddReviewProps } from '../../types/types';
 import FormReview from '../../components/form-review';
+import { FilmProps } from '../../types/types';
 
-function AddReview({filmsCards}: AddReviewProps): JSX.Element {
+export type AddReviewProps = {
+  filmCards: FilmProps[];
+}
+
+function AddReview({filmCards}: AddReviewProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id ? parseInt(params.id, 10) : 1;
-  const film = filmsCards.find((x) => x.id === id);
+  const film = filmCards.find((x) => x.id === id);
   return (
     <>
       <Helmet>

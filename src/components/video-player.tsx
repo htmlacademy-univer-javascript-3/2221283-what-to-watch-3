@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 type VideoPlayerProps = {
   src: string;
-  id: number;
+  id: string;
   width: number;
   height: number;
   poster: string;

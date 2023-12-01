@@ -1,27 +1,27 @@
-type ReviewComponentProps = {
-  comment: string;
-  date: string;
-  user: string;
-  rating: number;
+import { ReviewProps } from '../types/types';
+import Review from './review';
+
+type ReviewTabProps = {
+  active: boolean;
+  reviews: ReviewProps[];
 }
 
-export default function Review({comment, date, user, rating}: ReviewComponentProps) {
-  const strDate = new Date(date);
-  const normalDate = strDate.toISOString().substring(0, 10);
+export default function Reviews({active, reviews}: ReviewTabProps) {
+  const secondColumnStart = Math.ceil(reviews.length / 2);
+
   return (
-    <div className="review">
-      <blockquote className="review__quote">
-        <p className="review__text">
-          {comment}
-        </p>
-        <footer className="review__details">
-          <cite className="review__author">{user}</cite>
-          <time className="review__date" dateTime={normalDate}>
-            {normalDate}
-          </time>
-        </footer>
-      </blockquote>
-      <div className="review__rating">{rating}</div>
+    <div>
+      {
+        active &&
+      <div className="film-card__reviews film-card__row">
+        <div className="film-card__reviews-col">
+          {reviews.slice(0, secondColumnStart).map((review) => (<Review key={review.id} date={review.date} user={review.user} comment={review.comment} rating={review.rating}/>))}
+        </div>
+        <div className="film-card__reviews-col">
+          {reviews.slice(secondColumnStart).map((review) => (<Review key={review.id} date={review.date} user={review.user} comment={review.comment} rating={review.rating}/>))}
+        </div>
+      </div>
+      }
     </div>
   );
 }

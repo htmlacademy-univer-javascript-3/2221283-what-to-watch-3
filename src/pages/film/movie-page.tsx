@@ -1,21 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import CardList from '../../components/card-list';
 import Logo from '../../components/logo';
 import Profile from '../../components/profile';
 import Footer from '../../components/footer';
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Overview from '../../components/overviews';
 import Details from '../../components/details';
 import Reviews from '../../components/reviews';
 import { changeGenre, getFilms } from '../../redux/store/action';
-import { FilmProps, ReviewProps } from '../../types/types';
+import { ReviewProps } from '../../types/types';
+import { fetchFilm } from '../../redux/store/api-actions';
+import { store } from '../../redux/store';
 
 export type MoviePageProps = {
-  filmCards: FilmProps[];
   reviews: ReviewProps[];
 }
 
@@ -33,11 +34,17 @@ function convertToText(rating:number):string{
   return textRating;
 }
 
-export default function MoviePage({filmCards, reviews}: MoviePageProps) {
+export default function MoviePage({reviews}: MoviePageProps) {
   const params = useParams();
+  const id = params.id ?? '';
+
+  useEffect(() => {
+    store.dispatch(fetchFilm(id));
+  }, [id]);
+
+  const film = useAppSelector((state) => state.loadFilm);
+
   const [toggleState, setToggleState] = useState(1);
-  const id = params.id ? parseInt(params.id, 10) : 1;
-  const film = filmCards.find((x) => x.id === id);
   const rating = film ? film.rating : 0;
   const textRating = convertToText(rating);
 
