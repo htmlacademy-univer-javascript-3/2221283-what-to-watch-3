@@ -1,22 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {Helmet} from 'react-helmet-async';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo';
 import Profile from '../../components/profile';
 import FormReview from '../../components/form-review';
-import { FilmProps } from '../../types/types';
+import { useAppSelector } from '../../hooks';
 
-export type AddReviewProps = {
-  filmCards: FilmProps[];
-}
-
-function AddReview({filmCards}: AddReviewProps): JSX.Element {
+function AddReview(): JSX.Element {
   const navigate = useNavigate();
-  const params = useParams();
-  const id = params.id ? parseInt(params.id, 10) : 1;
-  const film = filmCards.find((x) => x.id === id);
+  const film = useAppSelector((state) => state.loadFilm);
   return (
     <>
       <Helmet>

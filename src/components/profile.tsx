@@ -7,11 +7,13 @@ import Logout from './logout';
 export default function Profile() {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuth = authStatus === AuthStatus.Auth;
+  const userData = useAppSelector((state) => state.user);
+
   return (
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <Link to={'/mylist'} style={{ textDecoration: 'none' }}><img src="img/avatar.jpg" alt="User avatar" width={63} height={63} /></Link>
+          <Link to={'/mylist'} style={{ textDecoration: 'none' }}><img src={userData?.avatarUrl || 'img/avatar.jpg'} alt="User avatar" width={63} height={63} /></Link>
         </div>
       </li>
       <li className="user-block__item">

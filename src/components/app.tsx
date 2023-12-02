@@ -8,19 +8,17 @@ import Player from '../pages/player/player';
 import NotFoundPage from '../pages/not-found/not-found';
 import {AppRoute, AuthStatus} from '../const';
 import PrivateRoute from './private-route/private-route';
-import { HeroProps, FilmProps, SmallFilmProps, ReviewProps } from '../types/types';
+import { FilmProps, SmallFilmProps } from '../types/types';
 import { useAppSelector } from '../hooks';
 import LoadingScreen from '../pages/loading-screen/loading-screen';
 
 
 type AppProps = {
-  heroFilmCard: HeroProps;
   filmCards: FilmProps[];
   smallFilmCards: SmallFilmProps[];
-  reviews: ReviewProps[];
 }
 
-export default function App({heroFilmCard, filmCards, smallFilmCards, reviews}: AppProps) {
+export default function App({filmCards, smallFilmCards}: AppProps) {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
   const isFilmsLoading = useAppSelector((state) => state.isFilmsLoading);
 
@@ -32,16 +30,12 @@ export default function App({heroFilmCard, filmCards, smallFilmCards, reviews}: 
   return (
     <Routes>
       <Route path={AppRoute.Root} element={
-        <Main
-          heroFilmCard={heroFilmCard}
-        />
+        <Main />
       }
       />
       <Route path={AppRoute.Login} element={<SignIn />} />
       <Route path={AppRoute.Films} element={
-        <MoviePage
-          reviews = {reviews}
-        />
+        <MoviePage />
       }
       />
       <Route path={AppRoute.MyListEnum} element={
@@ -54,9 +48,7 @@ export default function App({heroFilmCard, filmCards, smallFilmCards, reviews}: 
       />
       <Route path={AppRoute.AddReviewEnum} element={
         <PrivateRoute>
-          <AddReview
-            filmCards = {filmCards}
-          />
+          <AddReview />
         </PrivateRoute>
       }
       />
