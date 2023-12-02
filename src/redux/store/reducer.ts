@@ -1,7 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilms, loadFilms, changeAuth, setError, setFilmsLoadingStatus, loadFilm, setFilmLoadingStatus, setValidationError } from './action';
-import { SmallFilmProps, FilmProps } from '../../types/types';
+import { changeGenre, getFilms, loadFilms, changeAuth, setError, setFilmsLoadingStatus, loadFilm, setFilmLoadingStatus, setValidationError,
+  loadHeroFilm, loadSimularFilms, loadReviews, saveUser } from './action';
+import { SmallFilmProps, FilmProps, HeroProps, ReviewProps } from '../../types/types';
 import { AuthStatus } from '../../const';
+import { UserData } from '../../types/user-data';
 
 type initialStateProps = {
   genre: string;
@@ -15,6 +17,10 @@ type initialStateProps = {
   loadFilm: FilmProps | null;
   isFilmLoading: boolean;
   isSigninError: boolean;
+  heroFilm: HeroProps | null;
+  similarFilms: SmallFilmProps[] | null;
+  reviews: ReviewProps[];
+  user: UserData | null;
 }
 
 const initialState:initialStateProps = {
@@ -28,7 +34,11 @@ const initialState:initialStateProps = {
   isFilmsLoading: false,
   loadFilm: null,
   isFilmLoading: false,
-  isSigninError: false
+  isSigninError: false,
+  similarFilms: [],
+  reviews: [],
+  user: null,
+  heroFilm: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -79,6 +89,19 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setValidationError, (state, action) => {
       state.isSigninError = action.payload;
+    })
+    .addCase(loadHeroFilm, (state, action) => {
+      state.heroFilm = action.payload;
+    })
+    .addCase(loadSimularFilms, (state, action) => {
+      state.similarFilms = action.payload;
+      state.showedFilms = state.similarFilms;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(saveUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

@@ -18,12 +18,11 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 export enum APIRoute {
   Films = '/films',
   Film = '/films/',
-  SimilarFilms = '/films/{filmId}/similar',
   Promo = '/promo',
-  Favorite = '/favorite',
+  Favorite = '/favorite/',
   CheckFavorite = '/favorite/{filmId}/{status}',
-  Comments = '/comments/{filmId}',
-  AddComment = '/comments/{filmId}',
+  Comments = '/comments/',
+  AddComment = '/comments/',
   Login = '/login',
   Logout = '/logout',
 }
