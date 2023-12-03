@@ -3,11 +3,12 @@ import { useAppSelector } from '../hooks';
 import { AuthStatus } from '../const';
 import Login from './login';
 import Logout from './logout';
+import { getAuthStatus, getUserData } from '../redux/store/user-process/user-selectors';
 
 export default function Profile() {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   const isAuth = authStatus === AuthStatus.Auth;
-  const userData = useAppSelector((state) => state.user);
+  const userData = useAppSelector(getUserData);
 
   return (
     <ul className="user-block">

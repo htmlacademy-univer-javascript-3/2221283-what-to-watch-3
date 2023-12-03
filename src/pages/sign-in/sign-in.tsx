@@ -5,11 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../redux/store/api-actions';
 import { AppRoute } from '../../const';
 import { redirectToRoute } from '../../redux/store/action';
+import { getSignInError } from '../../redux/store/user-process/user-selectors';
 
 export default function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const sendingStatus = useAppSelector((state) => state.isSigninError);
+  const sendingStatus = useAppSelector(getSignInError);
   const dispatch = useAppDispatch();
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

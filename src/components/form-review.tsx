@@ -1,10 +1,11 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks';
 import { sendReview } from '../redux/store/api-actions';
 
 export default function FormReview() {
   const params = useParams();
+  const navigate = useNavigate();
   const date = new Date();
   const [disabled, setDisabled] = useState(true);
   const [isValidate, setIsValidate] = useState(false);
@@ -20,7 +21,6 @@ export default function FormReview() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    setIsValidate((review.comment.length >= 50) && (review.comment.length <= 400));
 
     if (isValidate){
       dispatch(sendReview({
@@ -28,12 +28,17 @@ export default function FormReview() {
         rating: review.rating,
         id: review.id ? review.id : '',
       }));
+      navigate(-1);
     }
   }
 
   useEffect(()=>{
     setDisabled((review.comment === '') || (review.rating === -1));
   },[review.comment, review.rating]);
+
+  useEffect(()=>{
+    setIsValidate((review.comment.length >= 50) && (review.comment.length <= 400));
+  },[review.comment]);
 
   function handleText(event: ChangeEvent<HTMLTextAreaElement>): void {
     setReview({...review, comment: event.target.value});

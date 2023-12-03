@@ -4,10 +4,11 @@ import Logo from '../../components/logo';
 import Profile from '../../components/profile';
 import FormReview from '../../components/form-review';
 import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../redux/store/data-process/data-selectors';
 
 function AddReview(): JSX.Element {
   const navigate = useNavigate();
-  const film = useAppSelector((state) => state.loadFilm);
+  const film = useAppSelector(getFilm);
   return (
     <>
       <Helmet>

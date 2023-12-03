@@ -1,7 +1,7 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse} from 'axios';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
-import { processErrorHandle } from '../store/process-error-handle';
+import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://13.design.pages.academy/wtw';
 const TIMEOUT = 5000;
@@ -41,7 +41,7 @@ export const createApi = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
 
-        processErrorHandle(detailMessage.message);
+        toast.warn(detailMessage.message);
       }
 
       throw error;

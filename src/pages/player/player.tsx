@@ -1,19 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useNavigate, useParams } from 'react-router-dom';
-import { FilmProps } from '../../types/types';
 
-type PlayerProps = {
-  filmCards: FilmProps[];
-}
-
-export default function Player({filmCards}: PlayerProps) {
+export default function Player() {
   const params = useParams();
   const navigate = useNavigate();
   const id = params.id ? parseInt(params.id, 10) : 1;
-  const film = filmCards.find((x) => x.id === id);
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg" />
@@ -28,7 +18,7 @@ export default function Player({filmCards}: PlayerProps) {
               Toggler
             </div>
           </div>
-          <div className="player__time-value">{film?.runTime}</div>
+          <div className="player__time-value">{id}</div>
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play">

@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import CardList from '../../components/card-list';
 import Logo from '../../components/logo';
 import Profile from '../../components/profile';
 import Footer from '../../components/footer';
 import { Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Overview from '../../components/overviews';
-import Details from '../../components/details';
-import Reviews from '../../components/reviews';
-import { changeGenre, getFilms } from '../../redux/store/action';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, fetchReviews, fetchSimilarFilms } from '../../redux/store/api-actions';
 import { store } from '../../redux/store';
 import { AuthStatus } from '../../const';
+import Tabs from '../../components/tabs';
+import { getFilm, getReviews } from '../../redux/store/data-process/data-selectors';
+import { getAuthStatus } from '../../redux/store/user-process/user-selectors';
+import { filterByGenre, showFilms } from '../../redux/store/data-process/data-process';
 
 function convertToText(rating:number):string{
   let textRating = '';
@@ -31,6 +28,7 @@ function convertToText(rating:number):string{
 }
 
 export default function MoviePage() {
+
   const params = useParams();
   const id = params.id ?? '';
 
@@ -40,21 +38,16 @@ export default function MoviePage() {
     store.dispatch(fetchReviews(id));
   }, [id]);
 
-  const film = useAppSelector((state) => state.loadFilm);
-  const reviews = useAppSelector((state) => state.reviews);
-  const isLogin = useAppSelector((state) => state.authorizationStatus) === AuthStatus.Auth;
+  const film = useAppSelector(getFilm);
+  const reviews = useAppSelector(getReviews);
+  const isLogin = useAppSelector(getAuthStatus) === AuthStatus.Auth;
 
-  const [toggleState, setToggleState] = useState(1);
   const rating = film ? film.rating : 0;
   const textRating = convertToText(rating);
 
   const dispatch = useAppDispatch();
-  dispatch(changeGenre(film?.genre ? film?.genre : 'All'));
-  dispatch(getFilms());
-
-  const toggleTabs = (index:number) => {
-    setToggleState(index);
-  };
+  dispatch(filterByGenre(film?.genre ? film?.genre : 'All'));
+  dispatch(showFilms());
 
   return (
     <>
@@ -110,49 +103,7 @@ export default function MoviePage() {
               />
             </div>
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className={toggleState === 1 ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
-                    onClick={() => toggleTabs(1)}
-                  >
-                    <a className="film-nav__link">
-                      Overview
-                    </a>
-                  </li>
-                  <li className={toggleState === 2 ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
-                    onClick={() => toggleTabs(2)}
-                  >
-                    <a className="film-nav__link">
-                      Details
-                    </a>
-                  </li>
-                  <li className={toggleState === 3 ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
-                    onClick={() => toggleTabs(3)}
-                  >
-                    <a className="film-nav__link">
-                      Reviews
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              <Overview
-                rating={film?.rating}
-                textRating={textRating}
-                scoresCount={film?.scoresCount}
-                active={toggleState === 1}
-                description={film?.description}
-                director={film?.director}
-                starring={film?.starring}
-              />
-              <Details
-                active={toggleState === 2}
-                director={film?.director}
-                starring={film?.starring}
-                runtime={film?.runTime}
-                genre={film?.genre}
-                released={film?.released}
-              />
-              <Reviews active={toggleState === 3} reviews={reviews}/>
+              <Tabs film={film} textRating={textRating} reviews={reviews}/>
             </div>
           </div>
         </div>
