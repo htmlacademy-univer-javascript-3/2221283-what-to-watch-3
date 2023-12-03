@@ -33,6 +33,10 @@ export type FilmData = {
   similarFilmsLoadError: boolean;
   isSimilarFilmsLoading: boolean;
 
+  myList: SmallFilmProps[];
+  isMyListLoading: boolean;
+  MyListLoadError: boolean;
+
   showedFilms: SmallFilmProps[];
   shownFilmsCount: number;
 };

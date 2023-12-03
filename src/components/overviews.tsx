@@ -1,10 +1,10 @@
 type OverviewProps = {
-  director: string | undefined;
-  starring: string[] | undefined;
-  scoresCount: number | undefined;
-  description: string | undefined;
-  rating: number | undefined;
-  active: boolean | undefined;
+  director: string;
+  starring: string[];
+  scoresCount: number;
+  description: string;
+  rating: number;
+  active: boolean;
   textRating: string;
 }
 

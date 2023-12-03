@@ -5,7 +5,7 @@ import Overview from './overviews';
 import Reviews from './reviews';
 
 type TabsProps = {
-  film: FilmProps | null;
+  film: FilmProps;
   textRating: string;
   reviews: ReviewProps[];
 }
@@ -45,21 +45,21 @@ export default function Tabs({film, textRating, reviews}: TabsProps){
         </ul>
       </nav>
       <Overview
-        rating={film?.rating}
+        rating={film.rating}
         textRating={textRating}
-        scoresCount={film?.scoresCount}
+        scoresCount={film.scoresCount}
         active={toggleState === 1}
-        description={film?.description}
-        director={film?.director}
-        starring={film?.starring}
+        description={film.description}
+        director={film.director}
+        starring={film.starring}
       />
       <Details
         active={toggleState === 2}
-        director={film?.director}
-        starring={film?.starring}
-        runtime={film?.runTime}
-        genre={film?.genre}
-        released={film?.released}
+        director={film.director}
+        starring={film.starring}
+        runtime={film.runTime}
+        genre={film.genre}
+        released={film.released}
       />
       <Reviews
         active={toggleState === 3}

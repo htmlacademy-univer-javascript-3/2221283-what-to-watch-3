@@ -49,7 +49,7 @@ export default function NotFoundPage() : JSX.Element {
               textDecoration: 'none',
               color: '#fff'
             }}
-            to={AppRoute.Main}
+            to={AppRoute.Root}
           >
             Вернуться на главную
           </Link>

@@ -4,7 +4,7 @@ import Genre from './genre';
 
 const genres = ['All', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'] as const;
 
-export default function Genres(){
+export default function FilmsByGenres(){
 
   const [active, setActive] = useState('All');
 

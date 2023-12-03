@@ -8,49 +8,57 @@ import Player from '../pages/player/player';
 import NotFoundPage from '../pages/not-found/not-found';
 import {AppRoute, AuthStatus} from '../const';
 import PrivateRoute from './private-route/private-route';
-import { useAppSelector } from '../hooks';
-import LoadingScreen from '../pages/loading-screen/loading-screen';
 import { getAuthStatus } from '../redux/store/user-process/user-selectors';
 import { getFilmsLoadStatus } from '../redux/store/data-process/data-selectors';
-
+import { HelmetProvider } from 'react-helmet-async';
+import Spinner from '../pages/loading-screen/spinner';
+import { fetchMyList } from '../redux/store/api-actions';
+import { useAppSelector, useAppDispatch } from '../hooks';
 
 export default function App() {
-  const authStatus = useAppSelector(getAuthStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
   const isFilmsLoading = useAppSelector(getFilmsLoadStatus);
+  const dispatch = useAppDispatch();
 
-  if (isFilmsLoading || authStatus === AuthStatus.Unknown) {
+  if (authorizationStatus === AuthStatus.Unknown || isFilmsLoading) {
     return (
-      <LoadingScreen />
+      <Spinner />
     );
   }
+  if (authorizationStatus === AuthStatus.Auth){
+    dispatch(fetchMyList());
+  }
+
   return (
-    <Routes>
-      <Route path={AppRoute.Root} element={
-        <Main />
-      }
-      />
-      <Route path={AppRoute.Login} element={<SignIn />} />
-      <Route path={AppRoute.Films} element={
-        <MoviePage />
-      }
-      />
-      <Route path={AppRoute.MyListEnum} element={
-        <PrivateRoute>
-          <MyList />
-        </PrivateRoute>
-      }
-      />
-      <Route path={AppRoute.AddReviewEnum} element={
-        <PrivateRoute>
-          <AddReview />
-        </PrivateRoute>
-      }
-      />
-      <Route path={AppRoute.PlayerEnum} element={
-        <Player />
-      }
-      />
-      <Route path="*" element={<NotFoundPage />}/>
-    </Routes>
+    <HelmetProvider>
+      <Routes>
+        <Route path={AppRoute.Root} element={
+          <Main/>
+        }
+        />
+        <Route path={AppRoute.Login} element={<SignIn />} />
+        <Route path={AppRoute.Films} element={
+          <MoviePage/>
+        }
+        />
+        <Route path={AppRoute.MyListEnum} element={
+          <PrivateRoute>
+            <MyList/>
+          </PrivateRoute>
+        }
+        />
+        <Route path={AppRoute.AddReviewEnum} element={
+          <PrivateRoute>
+            <AddReview/>
+          </PrivateRoute>
+        }
+        />
+        <Route path={AppRoute.PlayerEnum} element={
+          <Player/>
+        }
+        />
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />}/>
+      </Routes>
+    </HelmetProvider>
   );
 }
