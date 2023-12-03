@@ -4,6 +4,7 @@ import Profile from './profile';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useEffect } from 'react';
 import { fetchHeroFilm } from '../redux/store/api-actions';
+import { getHeroFilm } from '../redux/store/data-process/data-selectors';
 
 function MainFilmCard() :JSX.Element {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ function MainFilmCard() :JSX.Element {
     dispatch(fetchHeroFilm());
   },[dispatch]);
 
-  const mainFilm = useAppSelector((state) => state.heroFilm);
+  const mainFilm = useAppSelector(getHeroFilm);
 
   return (
     <section className="film-card">

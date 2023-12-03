@@ -1,15 +1,16 @@
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getFilms } from '../redux/store/action';
+import { showFilms } from '../redux/store/data-process/data-process';
+import { getAllFilmsByGenre, getShowedFilmsCount } from '../redux/store/data-process/data-selectors';
 
 export default function ShowMore() {
   const dispatch = useAppDispatch();
-  const showFilmsCount = useAppSelector((state) => state.shownFilmsCount);
-  const filmsCount = useAppSelector((state) => state.films);
+  const showFilmsCount = useAppSelector(getShowedFilmsCount);
+  const filmsCount = useAppSelector(getAllFilmsByGenre).length;
   return (
     <div className="catalog__more">
-      {showFilmsCount !== filmsCount.length && (
+      {showFilmsCount !== filmsCount && (
         <button className="catalog__button" type="button" onClick={() =>{
-          dispatch(getFilms());
+          dispatch(showFilms);
         }}
         >
           Show more

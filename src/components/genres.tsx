@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CardList from './card-list';
 import Genre from './genre';
 
-const genres = ['All', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'];
+const genres = ['All', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'] as const;
 
 export default function Genres(){
 
