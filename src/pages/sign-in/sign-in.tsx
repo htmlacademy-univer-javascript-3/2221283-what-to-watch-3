@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer';
 import Logo from '../../components/logo';
 import { useRef, FormEvent } from 'react';
@@ -28,6 +29,9 @@ export default function SignIn(): JSX.Element {
 
   return (
     <div className="user-page">
+      <Helmet>
+        <title>Авторизация</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">Sign in</h1>

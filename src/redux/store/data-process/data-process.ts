@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchFilm, fetchFilms, fetchHeroFilm, fetchReviews, fetchSimilarFilms } from '../api-actions';
+import { fetchFilm, fetchFilms, fetchHeroFilm, fetchReviews, fetchSimilarFilms, fetchMyList } from '../api-actions';
 import { NameSpace } from '../../../const';
 import { FilmData } from '../../../types/state';
 
@@ -26,6 +26,10 @@ const initialState: FilmData = {
   similarFilms: [],
   similarFilmsLoadError: false,
   isSimilarFilmsLoading: false,
+
+  myList: [],
+  MyListLoadError: false,
+  isMyListLoading: false,
 
   showedFilms: [],
   shownFilmsCount: 0,
@@ -60,6 +64,9 @@ export const dataProcess = createSlice({
         state.shownFilmsCount++;
         i++;
       }
+    },
+    showMyFilms: (state) => {
+      state.showedFilms = state.myList;
     },
   },
   extraReducers(builder) {
@@ -118,8 +125,19 @@ export const dataProcess = createSlice({
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.isReviewsLoading = false;
+      })
+      .addCase(fetchMyList.pending, (state) => {
+        state.isMyListLoading = true;
+      })
+      .addCase(fetchMyList.rejected, (state) => {
+        state.MyListLoadError = true;
+        state.isMyListLoading = false;
+      })
+      .addCase(fetchMyList.fulfilled, (state, action) => {
+        state.myList = action.payload;
+        state.isMyListLoading = false;
       });
   }
 });
 
-export const { filterByGenre, showFilms } = dataProcess.actions;
+export const { filterByGenre, showFilms, showMyFilms } = dataProcess.actions;

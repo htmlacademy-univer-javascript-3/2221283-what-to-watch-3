@@ -1,17 +1,16 @@
+import { convertRatingToText } from '../utils';
+
 type DetailsProps = {
-  director: string | undefined;
-  starring: string[] | undefined;
-  runtime: number | undefined;
-  genre: string | undefined;
-  released: number | undefined;
-  active: boolean | undefined;
+  director: string;
+  starring: string[];
+  runtime: number;
+  genre: string;
+  released: number;
+  active: boolean;
 }
 
 export default function Details({director, starring, runtime, genre, released, active}: DetailsProps) {
-  runtime = runtime ? runtime : 0;
-  const hours = runtime && Math.floor(runtime / 60);
-  const minutes = runtime && runtime % 60;
-  const runtimeliteral = `${hours}h ${minutes}m`;
+  const runtimeliteral = convertRatingToText(runtime);
   return (
     <div>
       {active &&

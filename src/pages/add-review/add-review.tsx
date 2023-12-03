@@ -48,7 +48,7 @@ function AddReview(): JSX.Element {
             />
           </div>
         </div>
-        <FormReview />
+        <FormReview id={film?.id} />
       </section>
     </>
   );

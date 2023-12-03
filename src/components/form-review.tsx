@@ -1,16 +1,17 @@
-import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks';
 import { sendReview } from '../redux/store/api-actions';
 
-export default function FormReview() {
-  const params = useParams();
+type FormReviewProps = {
+  id: string;
+}
+
+export default function FormReview({id}:FormReviewProps) {
   const navigate = useNavigate();
   const date = new Date();
-  const [disabled, setDisabled] = useState(true);
-  const [isValidate, setIsValidate] = useState(false);
   const [review, setReview] = useState({
-    id: params.id,
+    id: id,
     date: date,
     user: '',
     comment: '',
@@ -22,23 +23,9 @@ export default function FormReview() {
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    if (isValidate){
-      dispatch(sendReview({
-        comment: review.comment,
-        rating: review.rating,
-        id: review.id ? review.id : '',
-      }));
-      navigate(-1);
-    }
+    dispatch(sendReview(review));
+    navigate(-1);
   }
-
-  useEffect(()=>{
-    setDisabled((review.comment === '') || (review.rating === -1));
-  },[review.comment, review.rating]);
-
-  useEffect(()=>{
-    setIsValidate((review.comment.length >= 50) && (review.comment.length <= 400));
-  },[review.comment]);
 
   function handleText(event: ChangeEvent<HTMLTextAreaElement>): void {
     setReview({...review, comment: event.target.value});
@@ -47,6 +34,9 @@ export default function FormReview() {
   function handleRating(event: ChangeEvent<HTMLInputElement>): void {
     setReview({...review, rating: parseInt(event.target.value, 10)});
   }
+
+  const validate = () =>
+    review.rating !== 0 && review.comment.length >= 50 && review.comment.length <= 400;
 
   return (
     <div className="add-review">
@@ -166,7 +156,7 @@ export default function FormReview() {
           </div>
         </div>
         <div className="add-review__text">
-          {!isValidate && (<label htmlFor='review-text'>Comment must be larger then 50, and less then 400</label>)}
+          {!validate() && (<label htmlFor='review-text'><small>Comment must be larger then 50, and less then 400</small></label>)}
           <textarea
             onChange={handleText}
             className="add-review__textarea"
@@ -176,9 +166,11 @@ export default function FormReview() {
             defaultValue={''}
           />
           <div className="add-review__submit">
-            <button disabled={disabled} className="add-review__btn" type="submit">
-          Post
+
+            <button disabled={!validate()} className="add-review__btn" type="submit">
+            Post
             </button>
+
           </div>
         </div>
       </form>

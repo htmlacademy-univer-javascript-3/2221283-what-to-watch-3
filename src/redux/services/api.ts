@@ -2,9 +2,11 @@ import axios, {AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse} fro
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
+import { browserHistory } from '../../browser-history';
+import { AppRoute } from '../../const';
 
 const BASE_URL = 'https://13.design.pages.academy/wtw';
-const TIMEOUT = 5000;
+const TIMEOUT = 1000;
 
 type DetailMessageType = {
   type: string;
@@ -13,7 +15,6 @@ type DetailMessageType = {
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true
 };
 
@@ -38,8 +39,10 @@ export const createApi = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.response.data);
+      if (error.response && error.response.status === 404) {
+        browserHistory.push(AppRoute.NotFound);
+      } else if (error.response && shouldDisplayError(error.response)) {
+        const detailMessage = error.response.data;
 
         toast.warn(detailMessage.message);
       }
