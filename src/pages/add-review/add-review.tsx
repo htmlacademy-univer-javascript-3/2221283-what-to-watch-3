@@ -1,35 +1,36 @@
-import {Helmet} from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Profile from '../../components/profile/profile';
 import FormReview from '../../components/form-review/form-review';
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../redux/store/data-process/data-selectors';
+import { Helmet } from 'react-helmet-async';
+import Spinner from '../../components/loading-screen/spinner';
 
-function AddReview(): JSX.Element {
+export default function AddReview() {
   const navigate = useNavigate();
   const film = useAppSelector(getFilm);
   return (
-    <>
-      <Helmet>
-        <title>WTW. Оставить комментарий</title>
-      </Helmet>
+    film ?
       <section className="film-card film-card--full">
+        <Helmet>
+          <title>Отзыв</title>
+        </Helmet>
         <div className="film-card__header">
           <div className="film-card__bg">
             <img
-              src={film?.backgroundImage}
-              alt={film?.name}
+              src={film.backgroundImage}
+              alt={film.name}
             />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header">
-            <Logo />
+            <Logo/>
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
                   <a onClick={() => navigate(-1)} className="breadcrumbs__link">
-                    {film?.name}
+                    {film.name}
                   </a>
                 </li>
                 <li className="breadcrumbs__item">
@@ -37,21 +38,18 @@ function AddReview(): JSX.Element {
                 </li>
               </ul>
             </nav>
-            <Profile />
+            <Profile/>
           </header>
           <div className="film-card__poster film-card__poster--small">
             <img
-              src={film?.posterImage}
-              alt={film?.name}
+              src={film.posterImage}
+              alt={film.name}
               width={218}
               height={327}
             />
           </div>
         </div>
-        <FormReview id={film?.id} />
-      </section>
-    </>
+        <FormReview id={film.id}/>
+      </section> : <Spinner/>
   );
 }
-
-export default AddReview;

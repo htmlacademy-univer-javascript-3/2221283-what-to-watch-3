@@ -9,7 +9,7 @@ export default function ShowMore() {
   return (
     <div className="catalog__more">
       {showFilmsCount !== filmsCount && (
-        <button className="catalog__button" type="button" onClick={() =>{
+        <button className="catalog__button" type="button" data-testid='showMoreButton' onClick={() =>{
           dispatch(showFilms);
         }}
         >

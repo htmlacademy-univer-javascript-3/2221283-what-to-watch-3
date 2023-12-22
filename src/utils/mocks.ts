@@ -3,7 +3,6 @@ import { createApi } from '../redux/services/api';
 import { State } from '../types/state';
 import { ThunkDispatch } from 'redux-thunk';
 import { AuthStatus } from '../const';
-import { film } from './films';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
 
@@ -22,7 +21,7 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     allLoadedFilms: [],
     isFilmsLoading: false,
     filmsLoadError: false,
-    loadedFilm: film,
+    loadedFilm: null,
     isFilmLoading: false,
     filmLoadError: false,
     allFilmsByGenre: [],

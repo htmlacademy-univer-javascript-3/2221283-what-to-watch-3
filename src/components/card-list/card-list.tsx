@@ -8,7 +8,7 @@ export default function CardList() {
     <div className="catalog__films-list">
       {films.map((filmCard) =>
         (
-          <article className="small-film-card catalog__films-card" key={filmCard.id} data-testId='movie'>
+          <article className="small-film-card catalog__films-card" key={filmCard.id} data-testid='movie'>
             <Card id={filmCard.id} name={filmCard.name} previewImage={filmCard.previewImage} previewVideoLink={filmCard.previewVideoLink} />
           </article>
         )
