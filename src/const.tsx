@@ -38,4 +38,17 @@ export enum FilmStatus {
   ToView = 1,
 }
 
+export const enum Genres {
+  All = 'All',
+  Comedy = 'Comedy',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Drama = 'Drama',
+  Horror = 'Horror',
+  KidsFamily = 'Kids & Family',
+  Romance ='Romance',
+  SciFi = 'Sci-Fi',
+  Thriller = 'Thriller'
+}
+
 export const genres = ['All', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'] as const;

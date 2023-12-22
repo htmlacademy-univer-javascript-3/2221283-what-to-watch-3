@@ -45,6 +45,7 @@ export default function VideoPlayer({src, id, width, height, poster, name}: Vide
   return (
     <Link className="small-film-card__link" to={`/films/${id}`}>
       <video
+        data-testid="video-player"
         onMouseOver={playMovie}
         onMouseOut={stopMovie}
         loop muted ref={videoRef} controls={false} width={width} height={height}

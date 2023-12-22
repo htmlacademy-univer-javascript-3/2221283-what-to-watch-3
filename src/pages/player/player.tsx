@@ -102,7 +102,7 @@ export default function Player() {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={togglePlay}>
+          <button type="button" className="player__play" onClick={togglePlay} data-testid='play-button'>
             <svg viewBox="0 0 19 19" width={19} height={19}>
               {isPlaying ? <use xlinkHref="#pause" /> : <use xlinkHref="#play-s" />}
             </svg>

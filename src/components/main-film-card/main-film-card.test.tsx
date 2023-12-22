@@ -1,14 +1,14 @@
 import { describe } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { AuthStatus, NameSpace } from '../../const.tsx';
-import { heroCard, smallFilms } from '../../utils/films.ts';
+import { HEROCARD, SMALLFILMS } from '../../utils/films.ts';
 import { withHistory, withStore } from '../../utils/mock-component.tsx';
 import HeroCard from './main-film-card.tsx';
 
 describe('Component: HeroCard', () => {
 
   it('should render correctly when NoAuth (w/o mylist button)', () => {
-    const mockHeroFilm = heroCard;
+    const mockHeroFilm = HEROCARD;
 
     const preparedComponent = withHistory(
       <HeroCard heroFilm={mockHeroFilm}/>
@@ -25,9 +25,9 @@ describe('Component: HeroCard', () => {
   });
 
   it('should render correctly with Auth (w mylist button)', () => {
-    const mockHeroFilm = heroCard;
-    const mockMyList = smallFilms;
-    const mockMyListLength = smallFilms.length;
+    const mockHeroFilm = HEROCARD;
+    const mockMyList = SMALLFILMS;
+    const mockMyListLength = SMALLFILMS.length;
 
     const preparedComponent = withHistory(
       <HeroCard heroFilm={mockHeroFilm}/>

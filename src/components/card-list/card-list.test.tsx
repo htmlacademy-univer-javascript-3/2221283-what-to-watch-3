@@ -3,16 +3,16 @@ import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component.tsx';
 import { NameSpace } from '../../const.tsx';
 import CardList from './card-list.tsx';
-import { smallFilms } from '../../utils/films.ts';
+import { SMALLFILMS } from '../../utils/films.ts';
 
 describe('Component: CardList', () => {
 
   it('should render correctly', () => {
-    const expectedCount = smallFilms.length;
-    const expectedName = smallFilms[0].name;
+    const expectedCount = SMALLFILMS.length;
+    const expectedName = SMALLFILMS[0].name;
     const preparedComponent = withHistory(<CardList/>);
     const { withStoreComponent } = withStore(preparedComponent, {
-      [NameSpace.Data]: { showedFilms: smallFilms },
+      [NameSpace.Data]: { showedFilms: SMALLFILMS },
     });
 
     render(withStoreComponent);

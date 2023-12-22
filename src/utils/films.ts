@@ -1,7 +1,8 @@
 import { FilmProps, HeroProps, SmallFilmProps } from '../types/types';
 
 export const VIDEO_MOCK = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
-export const heroCard: HeroProps = {
+
+export const HEROCARD: HeroProps = {
   id: '12312adsa14',
   name: 'The Grand Budapest Hotel',
   posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
@@ -13,7 +14,7 @@ export const heroCard: HeroProps = {
   isFavorite: false
 };
 
-export const smallFilms: SmallFilmProps[] = [
+export const SMALLFILMS: SmallFilmProps[] = [
   {
     id: '12312adsa14',
     name: 'The Grand Budapest Hotel',
@@ -128,7 +129,7 @@ export const smallFilms: SmallFilmProps[] = [
   }
 ];
 
-export const film: FilmProps = {
+export const FILM: FilmProps = {
   id: '123',
   name: 'The Grand Budapest Hotel',
   posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
