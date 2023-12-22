@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import Footer from '../../components/footer';
-import Logo from '../../components/logo';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
 import { useRef, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../redux/store/api-actions';

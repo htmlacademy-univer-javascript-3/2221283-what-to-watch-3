@@ -1,7 +1,7 @@
-import CardList from '../../components/card-list';
-import Footer from '../../components/footer';
-import Logo from '../../components/logo';
-import Profile from '../../components/profile';
+import CardList from '../../components/card-list/card-list';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
+import Profile from '../../components/profile/profile';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getMyFilms } from '../../redux/store/data-process/data-selectors';

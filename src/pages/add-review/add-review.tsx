@@ -1,8 +1,8 @@
 import {Helmet} from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../components/logo';
-import Profile from '../../components/profile';
-import FormReview from '../../components/form-review';
+import Logo from '../../components/logo/logo';
+import Profile from '../../components/profile/profile';
+import FormReview from '../../components/form-review/form-review';
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../redux/store/data-process/data-selectors';
 

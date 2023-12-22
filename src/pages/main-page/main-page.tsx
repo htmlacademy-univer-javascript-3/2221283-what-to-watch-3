@@ -1,9 +1,9 @@
-import MainFilmCard from '../../components/main-film-card';
-import Footer from '../../components/footer';
+import MainFilmCard from '../../components/main-film-card/main-film-card';
+import Footer from '../../components/footer/footer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { filterByGenre, showFilms } from '../../redux/store/data-process/data-process';
-import ShowMore from '../../components/show-more';
-import FilmsByGenres from '../../components/genres';
+import ShowMore from '../../components/show-more/show-more';
+import FilmsByGenres from '../../components/films-by-genre/genres';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getHeroFilm } from '../../redux/store/data-process/data-selectors';
