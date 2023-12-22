@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app';
+import App from './components/app/app';
 import { store } from './redux/store';
-import HistoryRouter from './components/history-router';
+import HistoryRouter from './components/history-router/history-router';
 import { Provider } from 'react-redux';
 import { checkAuthAction, fetchFilms, fetchHeroFilm } from './redux/store/api-actions';
 import { browserHistory } from './browser-history';

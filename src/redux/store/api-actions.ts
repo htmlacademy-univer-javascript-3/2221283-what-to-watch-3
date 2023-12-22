@@ -127,20 +127,21 @@ export const fetchMyList = createAsyncThunk<SmallFilmProps[], undefined, {
   },
 );
 
-export const sendReview = createAsyncThunk<void, ReviewData, {
+export const sendReview = createAsyncThunk<ReviewProps, ReviewData, {
   state: State;
   extra: AxiosInstance;
 }>(
   'DATA/sendReview',
   async ({comment, rating, id}, {extra: api}) => {
-    const data = {
+    const dataSend = {
       comment: comment,
       rating: rating,
     };
     const headers = {
       'x-token': getToken(),
     };
-    await api.post(`${APIRoute.AddComment}${id}`, data, {headers});
+    const { data } = await api.post<ReviewProps>(`${APIRoute.AddComment}${id}`, dataSend, {headers});
+    return data;
   },
 );
 

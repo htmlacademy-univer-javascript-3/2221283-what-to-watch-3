@@ -16,5 +16,5 @@ export const getAuthCheckedStatus = createSelector(
 );
 export const getSignInError = createSelector(
   (state: State) => state[NameSpace.User],
-  (state: UserProcess) => state.user,
+  (state: UserProcess) => state.signInError,
 );

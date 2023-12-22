@@ -4,7 +4,7 @@ import { getFilm } from '../../redux/store/data-process/data-selectors';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { fetchFilm } from '../../redux/store/api-actions';
-import Spinner from '../loading-screen/spinner';
+import Spinner from '../../components/loading-screen/spinner';
 
 export default function Player() {
   const params = useParams();
