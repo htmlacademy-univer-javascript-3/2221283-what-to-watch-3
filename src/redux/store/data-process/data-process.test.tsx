@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { FilmData } from '../../../types/state.ts';
 import { dataProcess, filterByGenre, showFilms } from './data-process.ts';
-import { VIDEO_MOCK, smallFilms } from '../../../utils/films.ts';
+import { VIDEO_MOCK, SMALLFILMS } from '../../../utils/films.ts';
 import { SmallFilmProps } from '../../../types/types.tsx';
+import { Genres } from '../../../const.tsx';
 
 describe('DataProcessSlice', () => {
   const initialState: FilmData = {
@@ -50,10 +51,10 @@ describe('DataProcessSlice', () => {
   });
 
   it('should put from allLoadedFilms to allFilmsByGenre filtered by genre with "filterByGenre" action', () => {
-    const allLoadedFilms = smallFilms;
+    const allLoadedFilms = SMALLFILMS;
     const initialStateWithLoadedFilms = {...initialState, allLoadedFilms};
 
-    const genre = 'Comedy';
+    const genre = Genres.Comedy;
     const allFilmsByGenre:SmallFilmProps[] = [
       {
         id: '1ss2312adsa14',
@@ -83,8 +84,8 @@ describe('DataProcessSlice', () => {
   });
 
   it('should add 8 films in showedFilms by "showFilms" from allFilmsByGenre action', () => {
-    const allLoadedFilms = smallFilms;
-    const allFilmsByGenre = smallFilms;
+    const allLoadedFilms = SMALLFILMS;
+    const allFilmsByGenre = SMALLFILMS;
     const showedFilms: SmallFilmProps[] = [
       {
         id: '12312adsa14',

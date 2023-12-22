@@ -8,7 +8,7 @@ import { State } from '../../types/state';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import { NameSpace, AuthStatus, APIRoute } from '../../const';
 import { checkAuthAction, fetchFilm, fetchFilms, fetchHeroFilm, fetchMyList, fetchReviews, fetchSimilarFilms, loginAction, logoutAction, sendReview, setFilmStatus } from './api-actions';
-import { film, heroCard, smallFilms } from '../../utils/films';
+import { FILM, HEROCARD, SMALLFILMS } from '../../utils/films';
 import { reviews } from '../../utils/reviews';
 import { AxiosError } from 'axios';
 import { AuthData } from '../../types/auth-data';
@@ -159,7 +159,7 @@ describe('Async actions', () => {
 
   describe('fetchFilms', () => {
     it('should dispatch "fetchFilms.pending" and "fetchFilms.fullfield" when response thunk "fetchFilms"',async () => {
-      const mockFilms = smallFilms;
+      const mockFilms = SMALLFILMS;
       mockAxiosAdapter.onGet(APIRoute.Films).reply(200, mockFilms);
 
       await store.dispatch(fetchFilms());
@@ -192,7 +192,7 @@ describe('Async actions', () => {
 
   describe('fetchHeroFilm', () => {
     it('should dispatch "fetchHeroFilm.pending" and "fetchHeroFilm.fullfield" when response thunk "fetchHeroFilm"',async () => {
-      const mockHeroFilm = heroCard;
+      const mockHeroFilm = HEROCARD;
       mockAxiosAdapter.onGet(APIRoute.Promo).reply(200, mockHeroFilm);
 
       await store.dispatch(fetchHeroFilm());
@@ -225,7 +225,7 @@ describe('Async actions', () => {
 
   describe('fetchFilm', () => {
     it('should dispatch "fetchFilm.pending" and "fetchFilm.fullfield" when response thunk "fetchFilm"',async () => {
-      const mockFilm = film;
+      const mockFilm = FILM;
       mockAxiosAdapter.onGet(`${APIRoute.Film}${mockFilm.id}`).reply(200, mockFilm);
 
       await store.dispatch(fetchFilm(mockFilm.id));
@@ -259,8 +259,8 @@ describe('Async actions', () => {
 
   describe('fetchSimilarFilms', () => {
     it('should dispatch "fetchSimilarFilms.pending" and "fetchSimilarFilms.fullfield" when response thunk "fetchSimilarFilms"',async () => {
-      const mockFilms = smallFilms;
-      const filmId = smallFilms[0].id;
+      const mockFilms = SMALLFILMS;
+      const filmId = SMALLFILMS[0].id;
       mockAxiosAdapter.onGet(`${APIRoute.Films}/${filmId}/similar`).reply(200, mockFilms);
 
       await store.dispatch(fetchSimilarFilms(filmId));
@@ -295,7 +295,7 @@ describe('Async actions', () => {
   describe('fetchReviews', () => {
     it('should dispatch "fetchReviews.pending" and "fetchReviews.fullfield" when response thunk "fetchReviews"',async () => {
       const mockReviews = reviews;
-      const id = film.id;
+      const id = FILM.id;
       mockAxiosAdapter.onGet(`${APIRoute.Comments}${id}`).reply(200, mockReviews);
 
       await store.dispatch(fetchReviews(id));
@@ -329,7 +329,7 @@ describe('Async actions', () => {
 
   describe('fetchMyList', () => {
     it('should dispatch "fetchMyList.pending" and "fetchMyList.fullfield" when response thunk "fetchMyList"',async () => {
-      const mockMyList = smallFilms;
+      const mockMyList = SMALLFILMS;
       mockAxiosAdapter.onGet(APIRoute.Favorite).reply(200, mockMyList);
 
       await store.dispatch(fetchMyList());
@@ -407,7 +407,7 @@ describe('Async actions', () => {
 
   describe('setFilmStatus', () => {
     it('should dispatch "setFilmStatus.pending" and "setFilmStatus.fullfield" when response thunk "setFilmStatus"',async () => {
-      const id = film.id;
+      const id = FILM.id;
       mockAxiosAdapter.onPost(`${APIRoute.Favorite}${id}/1`).reply(200);
 
       await store.dispatch(setFilmStatus(id));
@@ -423,7 +423,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "setFilmStatus.pending" and "setFilmStatus.fullfield" when response 409',async () => {
-      const id = film.id;
+      const id = FILM.id;
       mockAxiosAdapter.onPost(`${APIRoute.Favorite}${id}/0`).reply(409);
 
       try{
@@ -444,7 +444,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "setFilmStatus.pending" and "setFilmStatus.rejected" when server response 400 (setting to fav /1)',async () => {
-      const id = film.id;
+      const id = FILM.id;
       mockAxiosAdapter.onPost(`${APIRoute.Favorite}${id}/1`).reply(400);
 
       await store.dispatch(setFilmStatus(id));
@@ -458,7 +458,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "setFilmStatus.pending" and "setFilmStatus.rejected" when server response 400 (setting to no fav /0)',async () => {
-      const id = film.id;
+      const id = FILM.id;
       mockAxiosAdapter.onPost(`${APIRoute.Favorite}${id}/0`).reply(400);
 
       await store.dispatch(setFilmStatus(id));

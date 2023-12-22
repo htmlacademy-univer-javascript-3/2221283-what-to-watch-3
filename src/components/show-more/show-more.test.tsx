@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import ShowMore from './show-more.tsx';
 import { withStore, withHistory } from '../../utils/mock-component.tsx';
 import { NameSpace } from '../../const.tsx';
-import { smallFilms } from '../../utils/films.ts';
+import { SMALLFILMS } from '../../utils/films.ts';
 
 describe('Component: ShowMore', () => {
   it('should render correct', () => {
-    const mockFilms = smallFilms;
+    const mockFilms = SMALLFILMS;
     const expectedText = 'Show more';
 
     const withHistoryComponent = withHistory(<ShowMore />);
@@ -20,7 +20,7 @@ describe('Component: ShowMore', () => {
   });
 
   it('shouldnt render when no more films left to show', () => {
-    const mockFilms = smallFilms;
+    const mockFilms = SMALLFILMS;
     const expectedText = 'Show more';
 
     const withHistoryComponent = withHistory(<ShowMore />);

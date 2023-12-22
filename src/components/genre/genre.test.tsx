@@ -1,7 +1,7 @@
 import { describe } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { NameSpace } from '../../const.tsx';
-import { smallFilms } from '../../utils/films.ts';
+import { SMALLFILMS } from '../../utils/films.ts';
 import Genre from './genre.tsx';
 import { withHistory, withStore } from '../../utils/mock-component.tsx';
 
@@ -17,7 +17,7 @@ describe('Component: Genre', () => {
       />
     );
     const { withStoreComponent } = withStore(preparedComponent, {
-      [NameSpace.Data]: { showedFilms: smallFilms },
+      [NameSpace.Data]: { showedFilms: SMALLFILMS },
     });
 
     render(withStoreComponent);

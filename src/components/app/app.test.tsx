@@ -4,7 +4,7 @@ import { withHistory, withStore } from '../../utils/mock-component';
 import { AppRoute, AuthStatus, NameSpace, genres } from '../../const';
 import App from './app';
 import { makeFakeStore } from '../../utils/mocks';
-import { film } from '../../utils/films';
+import { FILM } from '../../utils/films';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;
@@ -47,7 +47,7 @@ describe('Application Routing', () => {
         allLoadedFilms: [],
         isFilmsLoading: false,
         filmsLoadError: false,
-        loadedFilm: film,
+        loadedFilm: FILM,
         isFilmLoading: false,
         filmLoadError: false,
         allFilmsByGenre: [],
@@ -66,8 +66,7 @@ describe('Application Routing', () => {
       },
     }));
 
-    // needs loaded film in store to render correctly
-    mockHistory.push(`/films/${film.id}`);
+    mockHistory.push(`/films/${FILM.id}`);
 
     render(withStoreComponent);
 
@@ -110,7 +109,7 @@ describe('Application Routing', () => {
         allLoadedFilms: [],
         isFilmsLoading: false,
         filmsLoadError: false,
-        loadedFilm: film,
+        loadedFilm: FILM,
         isFilmLoading: false,
         filmLoadError: false,
         allFilmsByGenre: [],
@@ -128,7 +127,7 @@ describe('Application Routing', () => {
         shownFilmsCount: 0
       },
     }));
-    mockHistory.push(`/player/${film.id}`);
+    mockHistory.push(`/player/${FILM.id}`);
 
     render(withStoreComponent);
 
@@ -168,7 +167,7 @@ describe('Application Routing', () => {
           allLoadedFilms: [],
           isFilmsLoading: false,
           filmsLoadError: false,
-          loadedFilm: film,
+          loadedFilm: FILM,
           isFilmLoading: false,
           filmLoadError: false,
           allFilmsByGenre: [],
@@ -187,11 +186,11 @@ describe('Application Routing', () => {
         },
       })
     );
-    mockHistory.push(`/films/${film.id}/review`);
+    mockHistory.push(`/films/${FILM.id}/review`);
 
     render(withStoreComponent);
 
-    screen.getAllByAltText(film.name).forEach((altText) => {
+    screen.getAllByAltText(FILM.name).forEach((altText) => {
       expect(altText).toBeInTheDocument();
     });
   });

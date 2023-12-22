@@ -7,13 +7,14 @@ import FilmsByGenres from '../../components/films-by-genre/genres';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getHeroFilm } from '../../redux/store/data-process/data-selectors';
+import { Genres } from '../../const';
 
 export default function Main() {
   const dispatch = useAppDispatch();
   const heroFilm = useAppSelector(getHeroFilm);
 
   useEffect(() => {
-    dispatch(filterByGenre('All'));
+    dispatch(filterByGenre(Genres.All));
     dispatch(showFilms());
   }, [dispatch]);
   return (
