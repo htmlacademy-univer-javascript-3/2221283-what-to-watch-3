@@ -85,7 +85,7 @@ export default function Player() {
       </Helmet>
       <video ref={videoRef} width="1200" height="800" src={film.videoLink} className="player__video" poster={film.posterImage} onTimeUpdate={onTimeUpdateVideo}/>
 
-      <button onClick={handleExit} type="button" className="player__exit">
+      <button onClick={handleExit} type="button" className="player__exit" data-testid='exitButton'>
         Exit
       </button>
 

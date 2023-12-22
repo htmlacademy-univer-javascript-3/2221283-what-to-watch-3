@@ -125,7 +125,7 @@ export default function FormReview({id}:FormReviewProps) {
               defaultValue={3}
               onChange={handleRating}
             />
-            <label className="rating__label" htmlFor="star-3">
+            <label className="rating__label" htmlFor="star-3" data-testid='star-3'>
           Rating 3
             </label>
             <input
@@ -161,10 +161,11 @@ export default function FormReview({id}:FormReviewProps) {
             id="review-text"
             placeholder="Review text"
             defaultValue={''}
+            data-testid='textarea-review'
           />
           <div className="add-review__submit">
 
-            <button disabled={!validate()} className="add-review__btn" type="submit">
+            <button disabled={!validate()} className="add-review__btn" type="submit" data-testid='post-button'>
             Post
             </button>
 

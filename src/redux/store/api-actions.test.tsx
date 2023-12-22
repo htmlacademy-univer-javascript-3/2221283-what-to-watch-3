@@ -7,10 +7,15 @@ import { AppThunkDispatch, extractActionsTypes } from '../../utils/mocks';
 import { State } from '../../types/state';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import { NameSpace, AuthStatus, APIRoute } from '../../const';
-import { checkAuthAction, fetchFilm, fetchFilms, fetchHeroFilm, fetchMyList, fetchReviews, fetchSimilarFilms, sendReview, setFilmStatus } from './api-actions';
+import { checkAuthAction, fetchFilm, fetchFilms, fetchHeroFilm, fetchMyList, fetchReviews, fetchSimilarFilms, loginAction, logoutAction, sendReview, setFilmStatus } from './api-actions';
 import { film, heroCard, smallFilms } from '../../utils/films';
 import { reviews } from '../../utils/reviews';
 import { AxiosError } from 'axios';
+import { AuthData } from '../../types/auth-data';
+import { redirectToRoute } from './action';
+import * as tokenStorage from '../services/token';
+import { UserData } from '../../types/user-data';
+
 
 describe('Async actions', () => {
   const axios = createApi();
@@ -85,6 +90,70 @@ describe('Async actions', () => {
         checkAuthAction.pending.type,
         checkAuthAction.rejected.type,
       ]);
+    });
+  });
+
+  describe('loginAction', () => {
+    it('should dispatch "loginAction.pending", "redirectToRoute", "loginAction.fulfilled" when server response 200', async() => {
+      const fakeUser: AuthData = { login: 'test@test.ru', password: '123456' };
+      const mockUser:UserData = {
+        id: 123,
+        email: 'test@test.ru',
+        token: 'secret',
+        avatarUrl: 'url/',
+      };
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(200, mockUser);
+
+      await store.dispatch(loginAction(fakeUser));
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const loginActionFullfield = emittedActions.at(2) as ReturnType<
+        typeof loginAction.fulfilled
+      >;
+      expect(extractedActionsTypes).toEqual([
+        loginAction.pending.type,
+        redirectToRoute.type,
+        loginAction.fulfilled.type,
+      ]);
+
+      expect(loginActionFullfield.payload).toEqual(mockUser);
+
+    });
+
+    it('should call "saveToken" once with the received token', async () => {
+      const fakeUser: AuthData = { login: 'test@test.ru', password: '123456' };
+      const fakeServerReplay = { token: 'secret' };
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(200, fakeServerReplay);
+      const mockSaveToken = vi.spyOn(tokenStorage, 'saveToken');
+
+      await store.dispatch(loginAction(fakeUser));
+
+      expect(mockSaveToken).toBeCalledTimes(1);
+      expect(mockSaveToken).toBeCalledWith(fakeServerReplay.token);
+    });
+
+  });
+
+  describe('logoutAction', () => {
+    it('should dispatch "logoutAction.pending", "logoutAction.fulfilled" when server response 204', async() => {
+      mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
+
+      await store.dispatch(logoutAction());
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        logoutAction.pending.type,
+        logoutAction.fulfilled.type,
+      ]);
+    });
+
+    it('should one call "dropToken" with "logoutAction"', async () => {
+      mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
+      const mockDropToken = vi.spyOn(tokenStorage, 'dropToken');
+
+      await store.dispatch(logoutAction());
+
+      expect(mockDropToken).toBeCalledTimes(1);
     });
   });
 
@@ -331,7 +400,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         sendReview.pending.type,
-        fetchFilm.rejected.type,
+        sendReview.rejected.type,
       ]);
     });
   });
