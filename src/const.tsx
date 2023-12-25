@@ -16,6 +16,19 @@ export enum AuthStatus {
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
+export const enum Genres {
+  All = 'All',
+  Comedy = 'Comedy',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Drama = 'Drama',
+  Horror = 'Horror',
+  KidsFamily = 'Kids & Family',
+  Romance ='Romance',
+  SciFi = 'Sci-Fi',
+  Thriller = 'Thriller'
+}
+
 export enum APIRoute {
   Films = '/films',
   Film = '/films/',
@@ -36,19 +49,6 @@ export enum NameSpace {
 export enum FilmStatus {
   Viewed = 0,
   ToView = 1,
-}
-
-export const enum Genres {
-  All = 'All',
-  Comedy = 'Comedy',
-  Crime = 'Crime',
-  Documentary = 'Documentary',
-  Drama = 'Drama',
-  Horror = 'Horror',
-  KidsFamily = 'Kids & Family',
-  Romance ='Romance',
-  SciFi = 'Sci-Fi',
-  Thriller = 'Thriller'
 }
 
 export const genres = ['All', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'] as const;

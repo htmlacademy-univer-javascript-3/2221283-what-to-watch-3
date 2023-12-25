@@ -570,7 +570,9 @@ main {
 
 .catalog__button {
   display: block;
-  width: 100%;
+  width: 10%;
+  margin: 0 auto;
+  margin-bottom: 40px;
   padding: 29px 40px;
   background: none;
   border: 1px solid rgba(217, 202, 116, 0.2);

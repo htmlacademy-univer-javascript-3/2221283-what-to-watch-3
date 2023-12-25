@@ -10,7 +10,6 @@ describe('Component: MyListButton', () => {
     const mockFilm = FILM;
     const mockMyList = SMALLFILMS;
 
-
     const preparedComponent = withHistory(
       <MyListButton film={mockFilm}/>
     );
