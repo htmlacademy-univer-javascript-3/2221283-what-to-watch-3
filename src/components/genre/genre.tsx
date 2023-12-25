@@ -8,9 +8,7 @@ type GenreProps = {
 }
 
 export default function Genre({name, isActive, setActive}:GenreProps) {
-
   const dispatch = useAppDispatch();
-
   return (
     <li className={`catalog__genres-item ${isActive === name ? 'catalog__genres-item--active' : ''}`}>
       <div className='catalog__genres-link'

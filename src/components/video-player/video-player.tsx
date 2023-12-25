@@ -41,7 +41,6 @@ export default function VideoPlayer({src, id, width, height, poster, name}: Vide
     event.target.load();
   }
 
-
   return (
     <Link className="small-film-card__link" to={`/films/${id}`}>
       <video

@@ -40,7 +40,7 @@ describe('Component: FormReview', () => {
 
     expect(screen.getByTestId('post-button')).toBeDisabled();
 
-  });
+  },);
 
   it('button should be disabled when not validate (text, but more then 400)', async () => {
     const str = new Array(404).join('a');

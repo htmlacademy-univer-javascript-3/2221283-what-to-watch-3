@@ -2,6 +2,7 @@ import CardList from '../../components/card-list/card-list';
 import Logo from '../../components/logo/logo';
 import Profile from '../../components/profile/profile';
 import Footer from '../../components/footer/footer';
+import MyListButton from '../../components/my-list-button/my-list-button';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -13,7 +14,7 @@ import { getAuthStatus } from '../../redux/store/user-process/user-selectors';
 import { filterByGenre, showFilms } from '../../redux/store/data-process/data-process';
 import { convertRatingToText } from '../../utils/functions';
 import { Helmet } from 'react-helmet-async';
-import MyListButton from '../../components/my-list-button/my-list-button';
+
 
 export default function MoviePage() {
 

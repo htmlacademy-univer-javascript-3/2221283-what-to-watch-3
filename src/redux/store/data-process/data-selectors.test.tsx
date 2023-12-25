@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest';
 import { AuthStatus, NameSpace } from '../../../const';
-import { getAllFilmsByGenre, getFilm, getFilms, getFilmsLoadStatus, getHeroFilm, getMyFilms, getReviews, getShowedFilms, getShowedFilmsCount, getSimilarFilms } from './data.selectors.ts';
+import { getAllFilmsByGenre, getFilm, getFilms, getFilmsLoadStatus, getHeroFilm, getMyFilms, getReviews, getShowedFilms, getShowedFilmsCount, getSimilarFilms } from './data-selectors.ts';
 
 
 describe('DataSelectors', () => {
