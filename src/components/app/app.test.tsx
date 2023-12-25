@@ -134,15 +134,15 @@ describe('Application Routing', () => {
     expect(screen.getByText('Exit')).toBeInTheDocument();
   });
 
-  it('should render the "NotFound" when user navigate to unknown route', () => {
+  it('should render the "NotFoundPage" when user navigate to unknown route', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
     mockHistory.push('/*');
 
     render(withStoreComponent);
 
-    expect(screen.getByText('404.')).toBeInTheDocument();
-    expect(screen.getByText('Go to main page')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('Вернуться на главную')).toBeInTheDocument();
   });
 
   it('should render the "AddReview" when user navigate to ""/films/:id/review""', () => {

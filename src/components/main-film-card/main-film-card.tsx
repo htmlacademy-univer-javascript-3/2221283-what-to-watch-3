@@ -54,9 +54,7 @@ export default function HeroCard({heroFilm}:HeroCardProps) {
                   <span>Play</span>
                 </Link>
               </button>
-
               {isAuth && <MyListButton film={heroFilm}/>}
-
             </div>
           </div>
         </div>

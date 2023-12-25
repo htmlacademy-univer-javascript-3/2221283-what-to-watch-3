@@ -6,7 +6,7 @@ export default function NotFoundPage() : JSX.Element {
   return (
     <>
       <Helmet>
-        <title>WTW. Not Found</title>
+        <title>404</title>
       </Helmet>
       <div className="user-page">
         <header className="page-header user-page__head">

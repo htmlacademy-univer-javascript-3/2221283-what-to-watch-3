@@ -164,11 +164,7 @@ export default function FormReview({id}:FormReviewProps) {
             data-testid='textarea-review'
           />
           <div className="add-review__submit">
-
-            <button disabled={!validate()} className="add-review__btn" type="submit" data-testid='post-button'>
-            Post
-            </button>
-
+            <button disabled={!validate()} className="add-review__btn" type="submit" data-testid='post-button'>Post</button>
           </div>
         </div>
       </form>

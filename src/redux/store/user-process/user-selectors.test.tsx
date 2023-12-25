@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest';
 import { AuthStatus, NameSpace } from '../../../const';
-import { getAuthStatus, getUserData, getAuthCheckedStatus, getSignInError } from './user.selectors.ts';
+import { getAuthStatus, getUserData, getAuthCheckedStatus, getSignInError } from './user-selectors.ts';
 
 
 describe('UserSelectors', () => {

@@ -1,6 +1,6 @@
+import Main from './main-page';
 import { describe, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Main from './main-page';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeStore } from '../../utils/mocks';
 
