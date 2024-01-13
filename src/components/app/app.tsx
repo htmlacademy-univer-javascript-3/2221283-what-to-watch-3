@@ -5,7 +5,7 @@ import MoviePage from '../../pages/film/movie-page';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFoundPage from '../not-found/not-found';
-import Spinner from '../loading-screen/spinner';
+import Spinner from '../spinner/spinner';
 import {AppRoute, AuthStatus} from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';

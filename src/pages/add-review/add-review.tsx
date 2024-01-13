@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import Profile from '../../components/profile/profile';
 import FormReview from '../../components/form-review/form-review';
-import Spinner from '../../components/loading-screen/spinner';
+import Spinner from '../../components/spinner/spinner';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../redux/store/data-process/data-selectors';
